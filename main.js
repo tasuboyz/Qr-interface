@@ -425,6 +425,7 @@ function changeLanguage() {
     themeSelect.options[2].text = t.colorfulTheme || "Colorful Theme";
 
     updateInputFields();
+    localStorage.setItem('language-select', lang);
 }
 
 function updateQRMode() {
@@ -435,6 +436,7 @@ function updateQRMode() {
 function changeTheme() {
     let theme = document.getElementById('theme-select').value;
     document.body.className = theme === 'default' ? '' : `${theme}-theme`;
+    localStorage.setItem('theme-select', `${theme}-theme`);
 }
 
 function initMap() {
@@ -657,6 +659,23 @@ function toggleSettingsModal() {
         modal.style.display = "block";
     }
 }
+
+function applySavedSettings() {
+    const savedLanguage = localStorage.getItem('language-select');
+    const savedTheme = localStorage.getItem('theme-select');
+    console.log(savedLanguage, savedTheme);
+    if (savedLanguage) {
+        document.getElementById('language-select').value = savedLanguage;
+        changeLanguage();
+    }
+    if (savedTheme) {
+        document.getElementById('theme-select').value = savedTheme.replace('-theme', '');
+        changeTheme();
+    }
+}
+document.addEventListener('DOMContentLoaded', (event) => {
+    applySavedSettings();
+});
 
 window.changeLanguage = changeLanguage;
 window.changeTheme = changeTheme;
