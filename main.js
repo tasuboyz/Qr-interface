@@ -66,7 +66,9 @@ let translations = {
         searchPlaceholder: "Search location",
         searchButton: "Search",
         settingsTitle: "Settings",
-        languageLabel: "Language:"
+        languageLabel: "Language:",
+        mecardSurname: "Surname",
+        mecardURL: "URL",
     },
     es: {
         title: "Creador de Códigos QR Artísticos",
@@ -96,7 +98,10 @@ let translations = {
         searchPlaceholder: "Buscar ubicación",
         searchButton: "Buscar",
         settingsTitle: "Configuraciones",
-        languageLabel: "Idioma:"
+        languageLabel: "Idioma:",
+        mecardSurname: "Familienname",
+        mecardURL: "URL"
+        
     },
     fr: {
         title: "Créateur de Code QR Artistique",
@@ -126,7 +131,9 @@ let translations = {
         searchPlaceholder: "Rechercher un emplacement",
         searchButton: "Recherche",
         settingsTitle: "Réglages",
-        languageLabel: "Langue :"
+        languageLabel: "Langue :",
+        mecardSurname: "Cognome",
+        mecardURL: "URL"
     },
     de: {
         title: "Künstlerischer QR-Code-Generator",
@@ -156,7 +163,9 @@ let translations = {
         searchPlaceholder: "Standort suchen",
         searchButton: "Suche",
         settingsTitle: "Einstellungen",
-        languageLabel: "Sprache:"
+        languageLabel: "Sprache:",
+        mecardSurname: "Familienname",
+        mecardURL: "URL"
     },
     it: {
         title: "Creatore di Codici QR Artistici",
@@ -186,7 +195,9 @@ let translations = {
         searchPlaceholder: "Cerca posizione",
         searchButton: "Cerca",
         settingsTitle: "Impostazioni",
-        languageLabel: "Lingua:"
+        languageLabel: "Lingua:",
+        mecardSurname: "Cognome",
+        mecardURL: "URL"
     },
     hi: {
         title: "कलात्मक QR कोड निर्माता",
@@ -216,7 +227,9 @@ let translations = {
         searchPlaceholder: "स्थान खोजें",
         searchButton: "खोजें",
         settingsTitle: "सेटिंग्स",
-        languageLabel: "भाषा:"
+        languageLabel: "भाषा:",
+        mecardSurname: "Прізвище",
+        mecardURL: "URL"
     },
     ru: {
         title: "Создатель художественных QR-кодов",
@@ -246,7 +259,9 @@ let translations = {
         searchPlaceholder: "Поиск места",
         searchButton: "Поиск",
         settingsTitle: "Настройки",
-        languageLabel: "Язык:"
+        languageLabel: "Язык:",
+        mecardSurname: "Фамилия",
+        mecardURL: "URL"
     },
     uk: {
         title: "Творець художніх QR-кодів",
@@ -276,7 +291,9 @@ let translations = {
         searchPlaceholder: "Пошук місця",
         searchButton: "Пошук",
         settingsTitle: "Налаштування",
-        languageLabel: "Мова:"
+        languageLabel: "Мова:",
+        mecardSurname: "Прізвище",
+        mecardURL: "URL"
     },
     zh: {
         title: "艺术二维码生成器",
@@ -306,7 +323,9 @@ let translations = {
         searchPlaceholder: "搜索位置",
         searchButton: "搜索",
         settingsTitle: "设置",
-        languageLabel: "语言："
+        languageLabel: "语言：",
+        mecardSurname: "姓��",
+        mecardURL: "URL"
     },
     ar: {
         title: "منشئ رمز QR الفني",
@@ -336,7 +355,9 @@ let translations = {
         searchPlaceholder: "ابحث عن الموقع",
         searchButton: "بحث",
         settingsTitle: "الإعدادات",
-        languageLabel: "اللغة:"
+        languageLabel: "اللغة:",
+        mecardSurname: "الكنية",
+        mecardURL: "الرابط"
     },
     pt: {
         title: "Criador de Código QR Artístico",
@@ -366,7 +387,9 @@ let translations = {
         searchPlaceholder: "Pesquisar localização",
         searchButton: "Pesquisar",
         settingsTitle: "Configurações",
-        languageLabel: "Idioma:"
+        languageLabel: "Idioma:",
+        mecardSurname: "Familienname",
+        mecardURL: "URL"
     },
     nl: {
         title: "Artistieke QR-code Creator",
@@ -396,7 +419,9 @@ let translations = {
         searchPlaceholder: "Zoek locatie",
         searchButton: "Zoeken",
         settingsTitle: "Instellingen",
-        languageLabel: "Taal:"
+        languageLabel: "Taal:",
+        mecardSurname: "Achternaam",
+        mecardURL: "URL"
     },
 };
 
@@ -500,26 +525,34 @@ function updateInputFields() {
                 <input type="text" id="qr-content" placeholder="${type === 'url' ? t.urlPlaceholder : t.textPlaceholder}">
             `;
             break;
-        case 'mecard':
-            inputFields.innerHTML = `
-                <div class="input-group">
-                    <input type="text" id="mecard-name" placeholder="${t.mecardName}">
-                </div>
-                <div class="input-group">
-                    <select id="mecard-phone-areacode" onchange="handleManualAreaCode(this)">
-                        ${getAreaCodeOptions()}
-                    </select>
-                    <input type="text" id="mecard-phone" placeholder="${t.mecardPhone}">
-                    <button onclick="addInput('mecard-phone')">+</button> 
-                </div>
-                <div class="input-group">
-                    <input type="text" id="mecard-email" placeholder="${t.mecardEmail}">
-                    <button onclick="addInput('mecard-email')">+</button>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="mecard-address" placeholder="${t.mecardAddress}">
-                </div>
-            `;
+            case 'mecard':
+                inputFields.innerHTML = `
+                    <div class="input-group">
+                        <input type="text" id="mecard-name" placeholder="${t.mecardName}">
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="mecard-surname" placeholder="${t.mecardSurname}">                        
+                    </div>
+                    <div class="input-group">
+                        <select id="mecard-phone-areacode" onchange="handleManualAreaCode(this)">
+                            ${getAreaCodeOptions()}
+                        </select>
+                        <input type="text" id="mecard-phone" placeholder="${t.mecardPhone}">
+                        <button onclick="addInput('mecard-phone')">+</button> 
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="mecard-email" placeholder="${t.mecardEmail}">
+                        <button onclick="addInput('mecard-email')">+</button>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="mecard-address" placeholder="${t.mecardAddress}">
+                        <button onclick="addInput('mecard-address')">+</button> 
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="mecard-url" placeholder="${t.mecardURL}">
+                        <button onclick="addInput('mecard-url')">+</button> 
+                    </div>
+                `;            
             break;
         case 'wifi':
             inputFields.innerHTML = `
