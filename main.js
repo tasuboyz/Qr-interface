@@ -436,7 +436,7 @@ function updateQRMode() {
 function changeTheme() {
     let theme = document.getElementById('theme-select').value;
     document.body.className = theme === 'default' ? '' : `${theme}-theme`;
-    localStorage.setItem('theme-select', `${theme}-theme`);
+    localStorage.setItem('theme-select', theme);
 }
 
 function initMap() {
@@ -510,13 +510,11 @@ function updateInputFields() {
                         ${getAreaCodeOptions()}
                     </select>
                     <input type="text" id="mecard-phone" placeholder="${t.mecardPhone}">
-                    <button onclick="addInput('mecard-phone')">+</button>
-                    
+                    <button onclick="addInput('mecard-phone')">+</button> 
                 </div>
                 <div class="input-group">
                     <input type="text" id="mecard-email" placeholder="${t.mecardEmail}">
                     <button onclick="addInput('mecard-email')">+</button>
-                    
                 </div>
                 <div class="input-group">
                     <input type="text" id="mecard-address" placeholder="${t.mecardAddress}">
@@ -593,10 +591,6 @@ function addInput(baseId) {
     inputGroup.parentNode.insertBefore(newInput, inputGroup.nextSibling);
 }
 
-function sendData(data) {
-    window.Telegram.WebApp.sendData(JSON.stringify(data));
-}
-
 function generateQR() {
     let type = document.getElementById('qr-type').value;
     let mode = document.getElementById('qr-mode').value;
@@ -619,9 +613,9 @@ function generateQR() {
             data.name = document.getElementById('mecard-name')?.value || '';
             data.phones = Array.from(document.querySelectorAll('[id^="mecard-phone"]')).map(input => {
                 let areaCodeSelect = input.previousElementSibling;
-                let areaCode = areaCodeSelect.value;
+                let areaCode = areaCodeSelect ? areaCodeSelect.value : '';
                 if (areaCode === '+manual') {
-                    let manualInput = areaCodeSelect.nextSibling;
+                    let manualInput = areaCodeSelect.nextElementSibling;
                     areaCode = manualInput && manualInput.className === 'manual-area-code' ? manualInput.value : '';
                 }
                 return `${areaCode}${input.value || ''}`;
@@ -635,10 +629,13 @@ function generateQR() {
             data.encryption = document.getElementById('wifi-encryption')?.value || '';
             break;
         case 'geo':
-            if (marker && marker.getLatLng) {
+            if (marker && typeof marker.getLatLng === 'function') {
                 let latlng = marker.getLatLng();
                 data.latitude = latlng.lat.toFixed(6);
                 data.longitude = latlng.lng.toFixed(6);
+            } else {
+                data.latitude = document.getElementById('geo-latitude')?.value || '';
+                data.longitude = document.getElementById('geo-longitude')?.value || '';
             }
             break;
     }
@@ -658,6 +655,10 @@ function toggleSettingsModal() {
     } else {
         modal.style.display = "block";
     }
+}
+
+function sendData(data) {
+    window.Telegram.WebApp.sendData(JSON.stringify(data));
 }
 
 function applySavedSettings() {

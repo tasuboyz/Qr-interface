@@ -1,8 +1,7 @@
 <html>
     <head>
         <!-- <base href="https://artqr.creations/"> -->
-        <title>ArtQR Creator</title>
-        <meta charset="UTF-8">
+        <title>ArtQR Creator</title><meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
@@ -17,105 +16,103 @@
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
         </svg>
         </div>
+<div class="modal" id="settings-modal">
+  <div class="modal-content">
+    <span class="close" onclick="toggleSettingsModal()">&times;</span>
+    <h2 id="settings-title">Settings</h2>
+    <div class="settings-group">
+      <label for="language-select" id="language-label">Language:</label>
+      <select id="language-select" onchange="changeLanguage()">
+        <option value="en">🇺🇸 English</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="it">🇮🇹 Italiano</option>
+        <option value="pt">🇵🇹 Português</option>
+        <option value="nl">🇳🇱 Nederlands</option>
+        <option value="pl">🇵🇱 Polski</option>
+        <option value="sv">🇸🇪 Svenska</option>
+        <option value="da">🇩🇰 Dansk</option>
+        <option value="fi">🇫🇮 Suomi</option>
+        <option value="no">🇳🇴 Norsk</option>
+        <option value="hi">🇮🇳 हिन्दी</option>
+        <option value="bn">🇧🇩 বাংলা</option>
+        <option value="ru">🇷🇺 Русский</option>
+        <option value="uk">🇺🇦 Українська</option>
+        <option value="zh">🇨🇳 中文 (简体)</option>
+        <option value="zh-tw">🇹🇼 中文 (繁體)</option>
+        <option value="ja">🇯🇵 日本語</option>
+        <option value="ko">🇰🇷 한국어</option>
+        <option value="ar">🇸🇦 العربية</option>
+        <option value="he">🇮🇱 עברית</option>
+        <option value="tr">🇹🇷 Türkçe</option>
+        <option value="th">🇹🇭 ไทย</option>
+        <option value="vi">🇻🇳 Tiếng Việt</option>
+        <option value="id">🇮🇩 Bahasa Indonesia</option>
+        <option value="ms">🇲🇾 Bahasa Melayu</option>
+        <option value="fil">🇵🇭 Filipino</option>
+        <option value="el">🇬🇷 Ελληνικά</option>
+        <option value="ro">🇷🇴 Română</option>
+        <option value="hu">🇭🇺 Magyar</option>
+        <option value="cs">🇨🇿 Čeština</option>
+        <option value="sk">🇸🇰 Slovenčina</option>
+        <option value="bg">🇧🇬 Български</option>
+        <option value="hr">🇭🇷 Hrvatski</option>
+        <option value="sr">🇷🇸 Српски</option>
+        <option value="sl">🇸🇮 Slovenščina</option>
+      </select>
+    </div>
+    <div class="settings-group">
+      <label for="theme-select" id="theme-label">Theme:</label>
+      <select id="theme-select" onchange="changeTheme()">
+        <option value="default">Default Theme</option>
+        <option value="dark">Dark Theme</option>
+        <option value="colorful">Colorful Theme</option>
+      </select>
+    </div>
+  </div>
+</div>
 
-        <div class="modal" id="settings-modal">
-        <div class="modal-content">
-            <span class="close" onclick="toggleSettingsModal()">&times;</span>
-            <h2 id="settings-title">Settings</h2>
-            <div class="settings-group">
-            <label for="language-select" id="language-label">Language:</label>
-            <select id="language-select" onchange="changeLanguage()">
-                <option value="en">🇺🇸 English</option>
-                <option value="es">🇪🇸 Español</option>
-                <option value="fr">🇫🇷 Français</option>
-                <option value="de">🇩🇪 Deutsch</option>
-                <option value="it">🇮🇹 Italiano</option>
-                <option value="pt">🇵🇹 Português</option>
-                <option value="nl">🇳🇱 Nederlands</option>
-                <option value="pl">🇵🇱 Polski</option>
-                <option value="sv">🇸🇪 Svenska</option>
-                <option value="da">🇩🇰 Dansk</option>
-                <option value="fi">🇫🇮 Suomi</option>
-                <option value="no">🇳🇴 Norsk</option>
-                <option value="hi">🇮🇳 हिन्दी</option>
-                <option value="bn">🇧🇩 বাংলা</option>
-                <option value="ru">🇷🇺 Русский</option>
-                <option value="uk">🇺🇦 Українська</option>
-                <option value="zh">🇨🇳 中文 (简体)</option>
-                <option value="zh-tw">🇹🇼 中文 (繁體)</option>
-                <option value="ja">🇯🇵 日本語</option>
-                <option value="ko">🇰🇷 한국어</option>
-                <option value="ar">🇸🇦 العربية</option>
-                <option value="he">🇮🇱 עברית</option>
-                <option value="tr">🇹🇷 Türkçe</option>
-                <option value="th">🇹🇭 ไทย</option>
-                <option value="vi">🇻🇳 Tiếng Việt</option>
-                <option value="id">🇮🇩 Bahasa Indonesia</option>
-                <option value="ms">🇲🇾 Bahasa Melayu</option>
-                <option value="fil">🇵🇭 Filipino</option>
-                <option value="el">🇬🇷 Ελληνικά</option>
-                <option value="ro">🇷🇴 Română</option>
-                <option value="hu">🇭🇺 Magyar</option>
-                <option value="cs">🇨🇿 Čeština</option>
-                <option value="sk">🇸🇰 Slovenčina</option>
-                <option value="bg">🇧🇬 Български</option>
-                <option value="hr">🇭🇷 Hrvatski</option>
-                <option value="sr">🇷🇸 Српски</option>
-                <option value="sl">🇸🇮 Slovenščina</option>
-            </select>
-            </div>
-            <div class="settings-group">
-            <label for="theme-select" id="theme-label">Theme:</label>
-            <select id="theme-select" onchange="changeTheme()">
-                <option value="default">Default Theme</option>
-                <option value="dark">Dark Theme</option>
-                <option value="colorful">Colorful Theme</option>
-            </select>
-            </div>
-        </div>
-        </div>
+<div class="container">
+    <h1 id="title">Artistic QR Code Creator</h1>
+    
+    <label for="qr-mode" id="mode-label">QR Code Mode:</label>
+    <select id="qr-mode" onchange="updateQRMode()">
+        <option value="normal">Normal QR Code</option>
+        <option value="artistic">Artistic QR Code</option>
+    </select>
+    
+    <label for="qr-type" id="type-label">QR Code Type:</label>
+    <select id="qr-type" onchange="updateInputFields()">
+        <option value="text">Text</option>
+        <option value="url">URL</option>
+        <option value="mecard">MeCard</option>
+        <option value="wifi">WiFi</option>
+        <option value="geo">Map</option>
+    </select>
+    
+    <div id="input-fields">
+    <label for="qr-content" id="content-label">Content:</label>
+    <div class="input-group">
+        <input type="text" id="qr-content" placeholder="Enter your content here">
+        <button onclick="searchLocation()" aria-label="Search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+        </button>
+    </div>
+</div>
+    
+    <label for="qr-color" id="color-label">QR Code Foreground Color:</label>
+    <input type="color" id="qr-color" value="#000000">
 
-        <div class="container">
-            <h1 id="title">Artistic QR Code Creator</h1>
-            
-            <label for="qr-mode" id="mode-label">QR Code Mode:</label>
-            <select id="qr-mode" onchange="updateQRMode()">
-                <option value="normal">Normal QR Code</option>
-                <option value="artistic">Artistic QR Code</option>
-            </select>
-            
-            <label for="qr-type" id="type-label">QR Code Type:</label>
-            <select id="qr-type" onchange="updateInputFields()">
-                <option value="text">Text</option>
-                <option value="url">URL</option>
-                <option value="mecard">MeCard</option>
-                <option value="wifi">WiFi</option>
-                <option value="geo">Map</option>
-            </select>
-            
-            <div id="input-fields">
-            <label for="qr-content" id="content-label">Content:</label>
-            <div class="input-group">
-                <input type="text" id="qr-content" placeholder="Enter your content here">
-                <button onclick="searchLocation()" aria-label="Search">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-            
-            <label for="qr-color" id="color-label">QR Code Foreground Color:</label>
-            <input type="color" id="qr-color" value="#000000">
-
-            <label for="qr-bg-color" id="bg-color-label">QR Code Background Color:</label>
-            <input type="color" id="qr-bg-color" value="#ffffff">
-            
-            <button onclick="generateQR()" id="generate-btn">Show QR Data</button>
-            
-            <div id="qrcode"></div>
-        </div>
-        <script src="./main.js"></script>
-    </body>
-</html>
+    <label for="qr-bg-color" id="bg-color-label">QR Code Background Color:</label>
+    <input type="color" id="qr-bg-color" value="#ffffff">
+    
+    <button onclick="generateQR()" id="generate-btn">Show QR Data</button>
+    
+    <div id="qrcode"></div>
+</div>
+<script src="./main.js"></script>
+</body></html>
