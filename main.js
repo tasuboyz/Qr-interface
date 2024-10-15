@@ -644,6 +644,7 @@ function generateQR() {
             break;
         case 'mecard':
             data.name = document.getElementById('mecard-name')?.value || '';
+            data.surname = document.getElementById('mecard-surname')?.value || '';
             data.phones = Array.from(document.querySelectorAll('[id^="mecard-phone"]')).map(input => {
                 let areaCodeSelect = input.previousElementSibling;
                 let areaCode = areaCodeSelect ? areaCodeSelect.value : '';
@@ -654,7 +655,8 @@ function generateQR() {
                 return `${areaCode}${input.value || ''}`;
             }).filter(Boolean);
             data.emails = Array.from(document.querySelectorAll('[id^="mecard-email"]')).map(input => input.value || '').filter(Boolean);
-            data.address = document.getElementById('mecard-address')?.value || '';
+            data.addresses = Array.from(document.querySelectorAll('[id^="mecard-address"]')).map(input => input.value || '').filter(Boolean);
+            data.urls = Array.from(document.querySelectorAll('[id^="mecard-url"]')).map(input => input.value || '').filter(Boolean);
             break;
         case 'wifi':
             data.ssid = document.getElementById('wifi-ssid')?.value || '';
